@@ -1,0 +1,30 @@
+<table class="table table-bordered">
+    								 
+
+  <tr>
+    <th>Customer (Name)</th>
+    <th>Shirt/Jacket Color</th>
+    <th>Contractor</th>
+    <th>Project/Need</th>
+    <th>Notes</th>
+    <th>Time In</th>
+    <th>Sales Person</th>
+    <th>Time Helped</th>
+    <th>Wait Time</th>
+    
+  </tr>
+  <tr app-record (recordEvent) = "onRecordAdded($event)"></tr>
+  
+  <tr app-saved-record *ngFor = "let r of records" 
+  [recordCustomerName] = "r.customerName"
+  [recordShirtJacketColor] = "r.shirtJacketColor"
+  [recordContractor] = "r.contractor"
+  [recordProject] = "r.project"
+  [recordNotes] = "r.notes"
+  [recordTimeIn] = "r.timeIn"
+  [recordSalesPerson] = "r.salesPerson"
+  [recordTimeHelped] = "r.timeHelped"
+  [recordWaitTime] = "r.waitTime"></tr>
+
+  
+  </table>
