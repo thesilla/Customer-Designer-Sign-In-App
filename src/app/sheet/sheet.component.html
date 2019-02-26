@@ -13,9 +13,13 @@
     <th>Wait Time</th>
     
   </tr>
-  <tr app-record (recordEvent) = "onRecordAdded($event)"></tr>
+  <tr id ="insertRecord" app-record (recordEvent) = "onRecordAdded($event)"></tr>
   
-  <tr app-saved-record *ngFor = "let r of records" 
+  <tr app-saved-record  (click) = "onRowClickEdit()"
+
+  (editRecordEvent) = "onRecordEdit($event)"
+
+  *ngFor = "let r of records; let i = index" 
   [recordCustomerName] = "r.customerName"
   [recordShirtJacketColor] = "r.shirtJacketColor"
   [recordContractor] = "r.contractor"
@@ -24,7 +28,11 @@
   [recordTimeIn] = "r.timeIn"
   [recordSalesPerson] = "r.salesPerson"
   [recordTimeHelped] = "r.timeHelped"
-  [recordWaitTime] = "r.waitTime"></tr>
+  [recordWaitTime] = "r.waitTime"
+  [editSavedRecord] = "edit"
+  [recordIndex] = "i"
+  >
+</tr>
 
   
   </table>

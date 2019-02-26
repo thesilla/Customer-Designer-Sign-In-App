@@ -1,12 +1,47 @@
-<td>{{customerName}}</td>
-<td>{{shirtJacketColor}}</td>
-<td>{{contractor}}</td>
-<td>{{project}}</td>
-<td>{{notes}}</td>
-<td>{{timeIn}}</td>
-<td>{{salesPerson}}</td>
-<td>{{timeHelped}}</td>
-<td>{{waitTime}}</td>
-<td>blahhh</td>
+<td *ngIf = "!edit" >{{customerName}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="customerName"></td>
+
+<td *ngIf = "!edit" >{{shirtJacketColor}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="shirtJacketColor"></td>
 
 
+<td *ngIf = "!edit" >{{contractor}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="contractor"></td>
+
+<td *ngIf = "!edit" >{{project}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="project"></td>
+
+<td *ngIf = "!edit" >{{notes}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="notes"></td>
+
+<td *ngIf = "!edit" >{{timeIn}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="timeIn"></td>
+
+<td *ngIf = "!edit" >{{salesPerson}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="salesPerson"></td>
+
+<td *ngIf = "!edit" >{{timeHelped}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="timeHelped"></td>
+
+<td *ngIf = "!edit" >{{waitTime}}</td>
+<td *ngIf = "edit"><input type="text" class="text" [(ngModel)]="waitTime"></td>
+
+
+<td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onEditRecord()"  >Update</button> {{ index }}</td>
+
+<!--
+
+
+    (click) = ""
+
+<input type = "text" [(ngModel)]="customerName"></td>
+<td><input type = "text" [(ngModel)]="shirtJacketColor"></td>
+<td><input type = "text" [(ngModel)]="contractor"></td>
+<td><input type = "text" [(ngModel)]="project"></td>
+<td><input type = "text" [(ngModel)]="notes"></td>
+<td><input type = "text" [(ngModel)]="timeIn"></td>
+<td><input type = "text" [(ngModel)]="salesPerson"></td>
+<td><input type = "text" [(ngModel)]="timeHelped"></td>
+<td><input type = "text" [(ngModel)]="waitTime">
+
+    -->

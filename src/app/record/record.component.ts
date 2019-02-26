@@ -19,6 +19,7 @@ export class RecordComponent implements OnInit {
   salesPerson: String;
   timeHelped: Date;
   waitTime: Number;
+  index: Number = -1;
 
   // object creates event, outputs object containing data from input
   // TODO - MAKE MODEL CLASS FOR THIS
@@ -38,7 +39,20 @@ export class RecordComponent implements OnInit {
       this.timeIn,
       this.salesPerson,
       this.timeHelped,
-      this.waitTime));
+      this.waitTime,
+      this.index // index set to -1 by default
+      ));
+
+      // reset property values
+      this.customerName = "";
+      this.shirtJacketColor = "";
+      this.contractor = "";
+      this.project = "";
+      this.notes = "";
+      this.timeIn = null;
+      this.salesPerson = "";
+      this.timeHelped = null;
+      this.waitTime = null;
       
   }
 
