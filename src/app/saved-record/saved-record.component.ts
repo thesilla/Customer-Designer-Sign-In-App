@@ -25,6 +25,10 @@ export class SavedRecordComponent implements OnInit {
   @Input('recordWaitTime') waitTime: Number;
 
 
+  // TODO
+  @Output() doneEditing = new EventEmitter<void>();
+
+
 
   public onEdit() {
 
@@ -42,8 +46,10 @@ export class SavedRecordComponent implements OnInit {
   
   
 
-  public onEditRecord(){
+  public onUpdateRecord(){
 
+    //this.edit = false;
+    this.doneEditing.emit();
     this.editRecord.emit(new SignInRecord(this.customerName,
       this.shirtJacketColor,
       this.contractor,

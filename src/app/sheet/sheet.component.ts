@@ -29,7 +29,12 @@ export class SheetComponent implements OnInit {
 
     
     this.records[record.index] = record;
-
+    
+    
+    console.log(record.customerName);
+    console.log(record.shirtJacketColor);
+    console.log(record.contractor);
+    console.log(record.index);
 
   }
 
@@ -41,7 +46,18 @@ export class SheetComponent implements OnInit {
 
       this.edit = true;
 
+    } 
+
+  }
+
+  public doneEditing(){
+
+    if (this.edit == true){
+
+      this.edit = false;
+
     }
+
 
   }
 

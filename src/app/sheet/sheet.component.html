@@ -18,7 +18,7 @@
   <tr app-saved-record  (click) = "onRowClickEdit()"
 
   (editRecordEvent) = "onRecordEdit($event)"
-
+  (doneEditing) = "doneEditing()"
   *ngFor = "let r of records; let i = index" 
   [recordCustomerName] = "r.customerName"
   [recordShirtJacketColor] = "r.shirtJacketColor"

@@ -19,7 +19,7 @@ export class RecordComponent implements OnInit {
   salesPerson: String;
   timeHelped: Date;
   waitTime: Number;
-  index: Number = -1;
+  index: number = -1;
 
   // object creates event, outputs object containing data from input
   // TODO - MAKE MODEL CLASS FOR THIS
