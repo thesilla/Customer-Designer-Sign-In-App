@@ -20,6 +20,7 @@ export class RecordComponent implements OnInit {
   timeHelped: Date;
   waitTime: String;
   index: number = -1;
+  timeInHoursString: String;
 
   // object creates event, outputs object containing data from input
   // TODO - MAKE MODEL CLASS FOR THIS
@@ -31,13 +32,12 @@ export class RecordComponent implements OnInit {
 
   public onAddRecord(){
 
-    var d = new Date(); // for now
+    // create stamp with current date/time
+    let d = new Date(); 
    
-    // Can use for printing date
-    //d.getHours(); 
-    //d.getMinutes(); 
-    //d.getSeconds();
+    // pass to timeIn
     this.timeIn = d;
+    this.timeInHoursString = this.timeIn.toLocaleTimeString();
 
     this.recordCreated.emit(new SignInRecord(this.customerName,
       this.shirtJacketColor,
@@ -48,7 +48,9 @@ export class RecordComponent implements OnInit {
       this.salesPerson,
       this.timeHelped,
       this.waitTime,
-      this.index // index set to -1 by default
+      0, // wait time in seconds - its 0 if record was first created
+      this.index,
+      this.timeInHoursString // index set to -1 by default
       ));
 
       // reset property values

@@ -10,9 +10,12 @@ export class SignInRecord {
         public timeIn: Date,
         public salesPerson: String,
         public timeHelped: Date,
+        
         public waitTime: String,
+        public waitTimeSeconds: number,
 
-        public index: number
+        public index: number,
+        public timeInHoursString: String
 
         ){
 

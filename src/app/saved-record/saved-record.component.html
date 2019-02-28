@@ -16,14 +16,15 @@
 
 
 
-<td *ngIf = "!edit" >{{recordViewTimeIn}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="timeIn"></td>
+<td >{{recordViewTimeIn}}</td>
+
 
 <td *ngIf = "!edit" >{{salesPerson}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="salesPerson"></td>
 
-<td *ngIf = "!edit" >{{timeHelped}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="timeHelped"></td>
+
+<td >{{timeHelped}}</td>
+
 
 <td>{{waitTime}}</td>
 

@@ -15,8 +15,8 @@ export class SheetComponent implements OnInit {
  
 
   public onRecordAdded(record: SignInRecord){
-    this.timeInHoursString = record.timeIn.toLocaleTimeString();
-   // this.timeInHoursString = "" + record.timeIn.getHours() + ":" + record.timeIn.getMinutes();
+    //this.timeInHoursString = record.timeIn.toLocaleTimeString();
+   
     // turn editing for rows off
     this.edit = false;
     this.records.push(record);

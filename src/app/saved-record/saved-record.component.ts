@@ -24,6 +24,8 @@ export class SavedRecordComponent implements OnInit {
   
   // total wait time in string form
   @Input('recordWaitTime') waitTime: String;
+  @Input('recordWaitTimeSeconds') waitTimeSeconds: number;
+  @Input() timeInHoursString: String;
   
   //total wait time in seconds value
   waitSeconds: number;
@@ -76,22 +78,7 @@ export class SavedRecordComponent implements OnInit {
 
     console.log(this.minutes + ":" + secondsTyped);
 
- 
-
-
-
-
-
-
-
-
-
-
   }
-
-
-
-
 
 
 
@@ -114,6 +101,51 @@ export class SavedRecordComponent implements OnInit {
   public onUpdateRecord(){
 
 
+    // if a sales person is entered
+    // --calculate waitTime/waitTimeSeconds
+    // --populate timeHelped
+    if (this.salesPerson != ""){
+
+      
+
+      this.waitTime = "asdasd";
+      this.waitTimeSeconds;
+
+
+      this.timeHelped = new Date();
+      this.timeDiff = this.endTime.getTime().valueOf() - this.startTime.getTime().valueOf();
+  
+  
+  
+      // strip the ms
+      this.timeDiff = this.timeDiff / 1000;
+      let totalSeconds = this.timeDiff;
+  
+  
+      // get seconds 
+      totalSeconds = Math.round(this.timeDiff);
+      this.minutes = Math.floor(totalSeconds / 60);
+      this.seconds = Math.floor(totalSeconds % 60);
+      
+      let secondsTyped: String;
+      if (this.seconds < 10){
+  
+        secondsTyped = "0" + this.seconds;
+      } else {
+  
+        secondsTyped = "" + this.seconds;
+  
+      }
+      
+  
+      this.waitTime = this.minutes + ":" + secondsTyped;
+  
+      //console.log(this.minutes + ":" + secondsTyped);
+
+
+
+
+    }
 
 
 
@@ -128,7 +160,9 @@ export class SavedRecordComponent implements OnInit {
       this.salesPerson,
       this.timeHelped,
       this.waitTime,
-      this.index
+      this.waitTimeSeconds,
+      this.index,
+      this.timeInHoursString
       ));
 
   }
