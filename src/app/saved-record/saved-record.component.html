@@ -23,8 +23,8 @@
 <td *ngIf = "!edit" >{{timeHelped}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="timeHelped"></td>
 
-<td *ngIf = "!edit" >{{waitTime}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="waitTime"></td>
+<td>{{waitTime}}</td>
+
 
 
 <td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecord()"  >Update</button></td>

@@ -4,8 +4,8 @@
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="contractor"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="project"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="notes"></td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="timeIn"></td>
+<td><input (keyup.enter) = "onAddRecord()" type = "time" class = "time" [(ngModel)]="timeIn"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="salesPerson"></td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="timeHelped"></td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="waitTime"></td>
+<td><input (keyup.enter) = "onAddRecord()" type = "time" class = "time" [(ngModel)]="timeHelped"></td>
+<td style = "text-align: center;">---</td>
 <td><button (click)="onAddRecord()" class="btn btn-primary">Submit</button></td>
