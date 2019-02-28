@@ -14,7 +14,9 @@
 <td *ngIf = "!edit" >{{notes}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="notes"></td>
 
-<td *ngIf = "!edit" >{{timeIn}}</td>
+
+
+<td *ngIf = "!edit" >{{recordViewTimeIn}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="timeIn"></td>
 
 <td *ngIf = "!edit" >{{salesPerson}}</td>
@@ -29,7 +31,13 @@
 
 <td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecord()"  >Update</button></td>
 
-<!--
+<button (click)= "startTimer()">Start Timer</button>
+
+<button (click)= "endTimer()">Stop Timer</button>
+
+
+   <!----> 
+<!--           
 
 
     (click) = ""

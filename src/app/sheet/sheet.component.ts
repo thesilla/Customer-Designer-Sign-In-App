@@ -11,10 +11,12 @@ export class SheetComponent implements OnInit {
   // allow editing for all row
   // if passed into child component will turn off just for that row
   edit: boolean = false;
+  timeInHoursString: String;
  
 
   public onRecordAdded(record: SignInRecord){
-    
+    this.timeInHoursString = record.timeIn.toLocaleTimeString();
+   // this.timeInHoursString = "" + record.timeIn.getHours() + ":" + record.timeIn.getMinutes();
     // turn editing for rows off
     this.edit = false;
     this.records.push(record);

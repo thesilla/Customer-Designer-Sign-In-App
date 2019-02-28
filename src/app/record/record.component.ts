@@ -18,7 +18,7 @@ export class RecordComponent implements OnInit {
   timeIn: Date;
   salesPerson: String;
   timeHelped: Date;
-  waitTime: Number;
+  waitTime: String;
   index: number = -1;
 
   // object creates event, outputs object containing data from input
@@ -30,6 +30,14 @@ export class RecordComponent implements OnInit {
   
 
   public onAddRecord(){
+
+    var d = new Date(); // for now
+   
+    // Can use for printing date
+    //d.getHours(); 
+    //d.getMinutes(); 
+    //d.getSeconds();
+    this.timeIn = d;
 
     this.recordCreated.emit(new SignInRecord(this.customerName,
       this.shirtJacketColor,
