@@ -1,4 +1,4 @@
-<table class="table table-bordered">
+<table id = "main-table" class="table table-bordered">
     								 
 
   <tr>
@@ -7,33 +7,60 @@
     <th>Contractor</th>
     <th>Project/Need</th>
     <th>Notes</th>
-    <th>Time In</th>
+    <th style = "padding-left: 35px; padding-right: 35px;">Time In</th>
     <th>Sales Person</th>
-    <th>Time Helped</th>
+    <th style = "padding-left: 35px; padding-right: 35px;" >Time Helped</th>
     <th>Wait Time</th>
     
   </tr>
   <tr id ="insertRecord" app-record (recordEvent) = "onRecordAdded($event)"></tr>
   
+  <!-- Make certain to pass back in all properties of object back down to saved-record component -->
   <tr app-saved-record  (click) = "onRowClickEdit()"
 
   (editRecordEvent) = "onRecordEdit($event)"
   (doneEditing) = "doneEditing()"
+  
   *ngFor = "let r of records; let i = index" 
   [recordCustomerName] = "r.customerName"
   [recordShirtJacketColor] = "r.shirtJacketColor"
   [recordContractor] = "r.contractor"
   [recordProject] = "r.project"
   [recordNotes] = "r.notes"
-  [recordViewTimeIn] = "r.timeInHoursString"
+  [recordTimeIn] = "r.timeIn"
   [recordSalesPerson] = "r.salesPerson"
   [recordTimeHelped] = "r.timeHelped"
   [recordWaitTime] = "r.waitTime"
-  [editSavedRecord] = "edit"
+  [timeInHoursString] = "r.timeInHoursString"
+  [timeHelpedHoursString] = "r.timeHelpedHoursString"
+  [recordWaitTimeSeconds] = "r.waitTimeSeconds"
   [recordIndex] = "i"
+  
+  [editSavedRecord] = "edit"
+
+
+
+
+
+  
   >
 </tr>
 <!--
+
+
+
+ public salesPerson: String,
+  public timeHelped: Date,
+  
+  public waitTime: String,
+  public waitTimeSeconds: number,
+
+  public index: number,
+  public timeInHoursString: String,
+  public timeHelpedHoursString: String
+
+
+
 // Can use for printing date
 //d.getHours(); 
 //d.getMinutes(); 

@@ -19,24 +19,29 @@ export class RecordComponent implements OnInit {
   salesPerson: String;
   timeHelped: Date;
   waitTime: String;
+  waitTimeSeconds: number;
   index: number = -1;
   timeInHoursString: String;
+  timeHelpedHoursString: String = "";
+
+  // array of salespeople
+  // TODO: ALPHABETECAL ARRAY OF ALL SALESPEOPLE
+  // ---> NEED FUNCTIONALITY TO EDIT THIS
+  salespeople: String[] = ['Mary', 'Gretel', 'Sam'];
+
 
   // object creates event, outputs object containing data from input
-  // TODO - MAKE MODEL CLASS FOR THIS
-  
-  
+
   @Output('recordEvent') recordCreated = new EventEmitter<SignInRecord>();
   
   
 
   public onAddRecord(){
 
-    // create stamp with current date/time
-    let d = new Date(); 
    
-    // pass to timeIn
-    this.timeIn = d;
+   
+    // pass current timestamp into timeIn
+    this.timeIn = new Date();
     this.timeInHoursString = this.timeIn.toLocaleTimeString();
 
     this.recordCreated.emit(new SignInRecord(this.customerName,
@@ -49,12 +54,12 @@ export class RecordComponent implements OnInit {
       this.timeHelped,
       this.waitTime,
       0, // wait time in seconds - its 0 if record was first created
-      this.index,
-      this.timeInHoursString // index set to -1 by default
+      this.index,// index set to -1 by default
+      this.timeInHoursString, 
+      this.timeHelpedHoursString // set to "" by default
       ));
 
       // reset property values
-      this.customerName = "";
       this.shirtJacketColor = "";
       this.contractor = "";
       this.project = "";
@@ -62,7 +67,11 @@ export class RecordComponent implements OnInit {
       this.timeIn = null;
       this.salesPerson = "";
       this.timeHelped = null;
-      this.waitTime = null;
+      this.waitTime = "";
+      this.waitTimeSeconds = 0; // wait time in seconds - its 0 if record was first created
+      this.index = -1;// index set to -1 by default
+      this.timeInHoursString = "", 
+      this.timeHelpedHoursString = ""; // set to "" by default
       
   }
 

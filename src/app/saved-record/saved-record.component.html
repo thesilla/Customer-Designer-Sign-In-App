@@ -16,14 +16,16 @@
 
 
 
-<td >{{recordViewTimeIn}}</td>
+<td >{{timeInHoursString}}</td>
 
 
 <td *ngIf = "!edit" >{{salesPerson}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="salesPerson"></td>
+<td *ngIf = "edit"><select class="form-control" [(ngModel)]="salesPerson">
+        <option *ngFor="let s of salespeople" [ngValue]="s">{{s}}</option>
+      </select></td>
 
 
-<td >{{timeHelped}}</td>
+<td >{{timeHelpedHoursString}}</td>
 
 
 <td>{{waitTime}}</td>
@@ -32,9 +34,7 @@
 
 <td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecord()"  >Update</button></td>
 
-<button (click)= "startTimer()">Start Timer</button>
 
-<button (click)= "endTimer()">Stop Timer</button>
 
 
    <!----> 

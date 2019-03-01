@@ -4,8 +4,26 @@
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="contractor"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="project"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="notes"></td>
-<td>will be populated when signup submitted</td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="salesPerson"></td>
-<td>will be populated when Salesperson assigned to customer</td>
-<td style = "text-align: center;">---</td>
+<td style = "text-align: center; padding: 10px;">---</td>
+
+
+
+<td>
+    
+
+        <select class="form-control" [(ngModel)]="salesPerson">
+                <option *ngFor="let s of salespeople" [ngValue]="s">{{s}}</option>
+              </select>
+
+
+
+
+
+</td>
+
+
+<td style = "text-align: center; padding: 5px;">---</td>
+<td style = "text-align: center; padding: 5px;">---</td>
 <td><button (click)="onAddRecord()" class="btn btn-primary">Submit</button></td>
+
+

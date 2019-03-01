@@ -12,7 +12,7 @@ export class SavedRecordComponent implements OnInit {
 
   // index of where particular component falls in array of SignInRecords
   @Input('recordIndex') index: number;
-  @Input() recordViewTimeIn: String
+  
   @Input('recordCustomerName') customerName: String;
   @Input('recordShirtJacketColor')shirtJacketColor: String;
   @Input('recordContractor') contractor: String;
@@ -25,7 +25,13 @@ export class SavedRecordComponent implements OnInit {
   // total wait time in string form
   @Input('recordWaitTime') waitTime: String;
   @Input('recordWaitTimeSeconds') waitTimeSeconds: number;
+  
   @Input() timeInHoursString: String;
+  @Input() timeHelpedHoursString: String;
+
+    // generate/send new SignInRecord object in event
+  // when caught, will *FIND INDEX* of that component in array and replace that memory space with this object
+  @Output('editRecordEvent') editRecord = new EventEmitter<SignInRecord>();
   
   //total wait time in seconds value
   waitSeconds: number;
@@ -41,45 +47,10 @@ export class SavedRecordComponent implements OnInit {
   seconds: number;
 
 
-   startTimer() {
-    this.startTime = new Date();
-  };
-  
-    endTimer() {
-
-     
-    this.endTime = new Date();
-    this.timeDiff = this.endTime.getTime().valueOf() - this.startTime.getTime().valueOf();
-
-
-
-    // strip the ms
-    this.timeDiff = this.timeDiff / 1000;
-    let totalSeconds = this.timeDiff;
-
-
-    // get seconds 
-    totalSeconds = Math.round(this.timeDiff);
-    this.minutes = Math.floor(totalSeconds / 60);
-    this.seconds = Math.floor(totalSeconds % 60);
-    
-    let secondsTyped: String;
-    if (this.seconds < 10){
-
-      secondsTyped = "0" + this.seconds;
-    } else {
-
-      secondsTyped = "" + this.seconds;
-
-    }
-    
-
-    this.waitTime = this.minutes + ":" + secondsTyped;
-
-    console.log(this.minutes + ":" + secondsTyped);
-
-  }
-
+    // array of salespeople
+  // TODO: ALPHABETECAL ARRAY OF ALL SALESPEOPLE
+  // ---> NEED FUNCTIONALITY TO EDIT THIS
+  salespeople: String[] = ['Mary', 'Gretel', 'Sam'];
 
 
   public onEdit() {
@@ -92,9 +63,7 @@ export class SavedRecordComponent implements OnInit {
 
   }
 
-  // generate/send new SignInRecord object in event
-  // when caught, will *FIND INDEX* of that component in array and replace that memory space with this object
-  @Output('editRecordEvent') editRecord = new EventEmitter<SignInRecord>();
+
   
   
 // what to do once update record button is clicked
@@ -104,30 +73,38 @@ export class SavedRecordComponent implements OnInit {
     // if a sales person is entered
     // --calculate waitTime/waitTimeSeconds
     // --populate timeHelped
-    if (this.salesPerson != ""){
 
-      
+    if (this.salesPerson){
+     
 
-      this.waitTime = "asdasd";
-      this.waitTimeSeconds;
+      console.log(this.salesPerson);
+      console.log("Time in is: " + this.timeIn);
 
-
+      this.timeInHoursString = this.timeIn.toLocaleTimeString();
+      // get time helped (as date), store into property
       this.timeHelped = new Date();
-      this.timeDiff = this.endTime.getTime().valueOf() - this.startTime.getTime().valueOf();
+
+      // get time helped (as String), store into property
+      this.timeHelpedHoursString = this.timeHelped.toLocaleTimeString();
+
+      // calculate time difference
+      this.timeDiff = this.timeHelped.getTime().valueOf() - this.timeIn.getTime().valueOf();
   
   
   
       // strip the ms
       this.timeDiff = this.timeDiff / 1000;
-      let totalSeconds = this.timeDiff;
-  
-  
-      // get seconds 
-      totalSeconds = Math.round(this.timeDiff);
-      this.minutes = Math.floor(totalSeconds / 60);
-      this.seconds = Math.floor(totalSeconds % 60);
       
-      let secondsTyped: String;
+   
+      // get seconds, store into property
+      this.waitTimeSeconds = Math.round(this.timeDiff);
+
+      // pull minutes and seconds to create wait time string
+      this.minutes = Math.floor(this.waitTimeSeconds / 60);
+      this.seconds = Math.floor(this.waitTimeSeconds % 60);
+      
+      // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
+      var secondsTyped: String;
       if (this.seconds < 10){
   
         secondsTyped = "0" + this.seconds;
@@ -137,13 +114,7 @@ export class SavedRecordComponent implements OnInit {
   
       }
       
-  
       this.waitTime = this.minutes + ":" + secondsTyped;
-  
-      //console.log(this.minutes + ":" + secondsTyped);
-
-
-
 
     }
 
@@ -162,8 +133,10 @@ export class SavedRecordComponent implements OnInit {
       this.waitTime,
       this.waitTimeSeconds,
       this.index,
-      this.timeInHoursString
+      this.timeInHoursString,
+      this.timeHelpedHoursString
       ));
+
 
   }
 

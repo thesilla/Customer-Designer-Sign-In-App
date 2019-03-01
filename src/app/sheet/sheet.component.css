@@ -4,3 +4,22 @@
 
 
 }
+
+#main-table{
+
+   
+    margin-left: 10px;
+    margin-right: 10px;
+    width: inherit;
+
+
+}
+
+th {
+
+
+    text-align: center; 
+    padding-left: 10px; 
+    padding-right: 10px;
+
+}

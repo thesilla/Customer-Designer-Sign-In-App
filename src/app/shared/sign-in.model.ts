@@ -15,7 +15,8 @@ export class SignInRecord {
         public waitTimeSeconds: number,
 
         public index: number,
-        public timeInHoursString: String
+        public timeInHoursString: String,
+        public timeHelpedHoursString: String
 
         ){
 
