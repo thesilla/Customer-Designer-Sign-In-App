@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
+import { DataService } from '../data.service';
+import { Hosted } from 'protractor/built/driverProviders';
 
 @Component({
   selector: '[app-saved-record]',
@@ -10,42 +12,39 @@ export class SavedRecordComponent implements OnInit {
   // will need to access this from parent to change what to show within this component
   @Input('editSavedRecord') edit: boolean = false;
 
-  // index of where particular component falls in array of SignInRecords
+  // index of where particular component falls in master array of SignInRecords
   @Input('recordIndex') index: number;
   
-  @Input('recordCustomerName') customerName: String;
-  @Input('recordShirtJacketColor')shirtJacketColor: String;
-  @Input('recordContractor') contractor: String;
-  @Input('recordProject') project: String;
-  @Input('recordNotes') notes: String;
-  @Input('recordTimeIn') timeIn: Date;
-  @Input('recordSalesPerson') salesPerson: String;
-  @Input('recordTimeHelped') timeHelped: Date;
-  
-  // total wait time in string form
-  @Input('recordWaitTime') waitTime: String;
-  @Input('recordWaitTimeSeconds') waitTimeSeconds: number;
-  
-  @Input() timeInHoursString: String;
-  @Input() timeHelpedHoursString: String;
+  // object to pass to view - is assigned by SHEET component
+  @Input() signInRecord: SignInRecord;
 
-    // generate/send new SignInRecord object in event
-  // when caught, will *FIND INDEX* of that component in array and replace that memory space with this object
-  @Output('editRecordEvent') editRecord = new EventEmitter<SignInRecord>();
-  
-  //total wait time in seconds value
-  waitSeconds: number;
+  updateRecordButtonClicked: boolean = false;
+  // embed hostlistener on to this directive
+  @HostListener('click') onclick(){
+
+    // if edit is off
+    if (!this.edit ){
+
+      // and also if update button wasn't clicked
+      if(!this.updateRecordButtonClicked){
+
+        //turn editing on
+        this.edit = true;
+        
+        
+
+      } else { // else means the click was on update button and editing should be off
+
+        this.edit = false;
+        this.updateRecordButtonClicked = false;// set button tracker back to false
+      }
+
+    }
 
 
-  
-  @Output() doneEditing = new EventEmitter<void>();
-
-  @Input() startTime: Date;
-  @Input() endTime: Date;
-  timeDiff: number;
-  minutes: number;
-  seconds: number;
-
+    console.log("this hostlistener works!");
+    
+  }
 
     // array of salespeople
   // TODO: ALPHABETECAL ARRAY OF ALL SALESPEOPLE
@@ -53,97 +52,94 @@ export class SavedRecordComponent implements OnInit {
   salespeople: String[] = ['Mary', 'Gretel', 'Sam'];
 
 
-  public onEdit() {
-
-    if(this.edit == false){
-
-      this.edit = true;
-
-    }
-
-  }
 
 
   
   
 // what to do once update record button is clicked
+
+
   public onUpdateRecord(){
 
+    
+    //console.log(this.edit);
+    //if editing is on, turn off
+    if(this.edit){
+
+      this.edit = false;
+    
+
+    }
+
+    //console.log(this.edit);
 
     // if a sales person is entered
     // --calculate waitTime/waitTimeSeconds
     // --populate timeHelped
 
-    if (this.salesPerson){
+    if (this.signInRecord.salesPerson){
      
 
-      console.log(this.salesPerson);
-      console.log("Time in is: " + this.timeIn);
+      console.log(this.signInRecord.salesPerson);
+      console.log("Time in is: " + this.signInRecord.timeIn);
 
-      this.timeInHoursString = this.timeIn.toLocaleTimeString();
+      this.signInRecord.timeInHoursString = this.signInRecord.timeIn.toLocaleTimeString();
       // get time helped (as date), store into property
-      this.timeHelped = new Date();
+      this.signInRecord.timeHelped = new Date();
 
       // get time helped (as String), store into property
-      this.timeHelpedHoursString = this.timeHelped.toLocaleTimeString();
+      this.signInRecord.timeHelpedHoursString = this.signInRecord.timeHelped.toLocaleTimeString();
 
       // calculate time difference
-      this.timeDiff = this.timeHelped.getTime().valueOf() - this.timeIn.getTime().valueOf();
+      var timeDiff = this.signInRecord.timeHelped.getTime().valueOf() - this.signInRecord.timeIn.getTime().valueOf();
   
   
   
       // strip the ms
-      this.timeDiff = this.timeDiff / 1000;
+      timeDiff = timeDiff / 1000;
       
    
       // get seconds, store into property
-      this.waitTimeSeconds = Math.round(this.timeDiff);
+      this.signInRecord.waitTimeSeconds = Math.round(timeDiff);
 
       // pull minutes and seconds to create wait time string
-      this.minutes = Math.floor(this.waitTimeSeconds / 60);
-      this.seconds = Math.floor(this.waitTimeSeconds % 60);
+      var minutes = Math.floor(this.signInRecord.waitTimeSeconds / 60);
+      var seconds = Math.floor(this.signInRecord.waitTimeSeconds % 60);
       
       // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
       var secondsTyped: String;
-      if (this.seconds < 10){
+      if (seconds < 10){
   
-        secondsTyped = "0" + this.seconds;
+        secondsTyped = "0" + seconds;
       } else {
   
-        secondsTyped = "" + this.seconds;
+        secondsTyped = "" + seconds;
   
       }
       
-      this.waitTime = this.minutes + ":" + secondsTyped;
+      this.signInRecord.waitTime = minutes + ":" + secondsTyped;
 
     }
 
 
 
-    //this.edit = false;
-    this.doneEditing.emit();
-    this.editRecord.emit(new SignInRecord(this.customerName,
-      this.shirtJacketColor,
-      this.contractor,
-      this.project,
-      this.notes,
-      this.timeIn,
-      this.salesPerson,
-      this.timeHelped,
-      this.waitTime,
-      this.waitTimeSeconds,
-      this.index,
-      this.timeInHoursString,
-      this.timeHelpedHoursString
-      ));
-
 
   }
 
+  onUpdateRecordButton(){
+    console.log("this button was clicked!");
+    this.updateRecordButtonClicked = true;
+    this.onUpdateRecord();
+    
+  }
 
-  constructor() { }
+
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
+
+
   }
+  
 
 }

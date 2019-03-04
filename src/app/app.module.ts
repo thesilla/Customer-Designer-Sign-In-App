@@ -10,6 +10,7 @@ import { HeaderComponent } from './header/header.component';
 import { BasicHighlightDirective} from './header/directives/basic-highlight.directive';
 import { BetterDirectiveDirective } from './header/directives/better-directive.directive';
 import { UnlessDirective } from './header/directives/unless.directive';
+import {DataService} from 'src\\app\\data.service';
 
 
 
@@ -29,7 +30,7 @@ import { UnlessDirective } from './header/directives/unless.directive';
     BrowserModule,
     FormsModule
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

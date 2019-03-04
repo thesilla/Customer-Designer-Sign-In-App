@@ -1,3 +1,5 @@
+
+
 <table id = "main-table" class="table table-bordered">
     								 
 
@@ -16,53 +18,10 @@
   <tr id ="insertRecord" app-record (recordEvent) = "onRecordAdded($event)"></tr>
   
   <!-- Make certain to pass back in all properties of object back down to saved-record component -->
-  <tr app-saved-record  (click) = "onRowClickEdit()"
-
-  (editRecordEvent) = "onRecordEdit($event)"
-  (doneEditing) = "doneEditing()"
-  
-  *ngFor = "let r of records; let i = index" 
-  [recordCustomerName] = "r.customerName"
-  [recordShirtJacketColor] = "r.shirtJacketColor"
-  [recordContractor] = "r.contractor"
-  [recordProject] = "r.project"
-  [recordNotes] = "r.notes"
-  [recordTimeIn] = "r.timeIn"
-  [recordSalesPerson] = "r.salesPerson"
-  [recordTimeHelped] = "r.timeHelped"
-  [recordWaitTime] = "r.waitTime"
-  [timeInHoursString] = "r.timeInHoursString"
-  [timeHelpedHoursString] = "r.timeHelpedHoursString"
-  [recordWaitTimeSeconds] = "r.waitTimeSeconds"
-  [recordIndex] = "i"
-  
-  [editSavedRecord] = "edit"
-
-
-
-
-
-  
+  <tr app-saved-record  *ngFor = "let r of records; let i = index" 
+             [signInRecord] = "r"
+             [recordIndex] = "i"
   >
-</tr>
-<!--
+  </tr>
 
-
-
- public salesPerson: String,
-  public timeHelped: Date,
-  
-  public waitTime: String,
-  public waitTimeSeconds: number,
-
-  public index: number,
-  public timeInHoursString: String,
-  public timeHelpedHoursString: String
-
-
-
-// Can use for printing date
-//d.getHours(); 
-//d.getMinutes(); 
-//d.getSeconds();-->
   </table>

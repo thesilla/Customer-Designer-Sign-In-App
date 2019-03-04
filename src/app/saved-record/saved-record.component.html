@@ -1,56 +1,36 @@
-<td *ngIf = "!edit"  >{{customerName}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="customerName"></td>
+<td *ngIf = "!edit"  >{{signInRecord.customerName}}</td>
+<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.customerName"></td>
 
-<td *ngIf = "!edit" >{{shirtJacketColor}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="shirtJacketColor"></td>
-
-
-<td *ngIf = "!edit" >{{contractor}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="contractor" ></td>
-
-<td *ngIf = "!edit" >{{project}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="project"></td>
-
-<td *ngIf = "!edit" >{{notes}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="notes"></td>
+<td *ngIf = "!edit" >{{signInRecord.shirtJacketColor}}</td>
+<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.shirtJacketColor"></td>
 
 
+<td *ngIf = "!edit" >{{signInRecord.contractor}}</td>
+<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.contractor" ></td>
 
-<td >{{timeInHoursString}}</td>
+<td *ngIf = "!edit" >{{signInRecord.project}}</td>
+<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.project"></td>
+
+<td *ngIf = "!edit" >{{signInRecord.notes}}</td>
+<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.notes"></td>
 
 
-<td *ngIf = "!edit" >{{salesPerson}}</td>
-<td *ngIf = "edit"><select class="form-control" [(ngModel)]="salesPerson">
+
+<td >{{signInRecord.timeInHoursString}}</td>
+
+
+<td *ngIf = "!edit" >{{signInRecord.salesPerson}}</td>
+<td *ngIf = "edit"><select class="form-control" [(ngModel)]="signInRecord.salesPerson">
         <option *ngFor="let s of salespeople" [ngValue]="s">{{s}}</option>
       </select></td>
 
 
-<td >{{timeHelpedHoursString}}</td>
+<td >{{signInRecord.timeHelpedHoursString}}</td>
 
 
-<td>{{waitTime}}</td>
-
-
-
-<td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecord()"  >Update</button></td>
+<td>{{signInRecord.waitTime}}</td>
 
 
 
+<td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecordButton()">Update</button></td>
 
-   <!----> 
-<!--           
-
-
-    (click) = ""
-
-<input type = "text" [(ngModel)]="customerName"></td>
-<td><input type = "text" [(ngModel)]="shirtJacketColor"></td>
-<td><input type = "text" [(ngModel)]="contractor"></td>
-<td><input type = "text" [(ngModel)]="project"></td>
-<td><input type = "text" [(ngModel)]="notes"></td>
-<td><input type = "text" [(ngModel)]="timeIn"></td>
-<td><input type = "text" [(ngModel)]="salesPerson"></td>
-<td><input type = "text" [(ngModel)]="timeHelped"></td>
-<td><input type = "text" [(ngModel)]="waitTime">
-
-    -->

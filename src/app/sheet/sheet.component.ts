@@ -1,5 +1,6 @@
 import { Component, OnInit} from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
+import { DataService } from '../data.service';
 @Component({
   selector: 'app-sheet',
   templateUrl: './sheet.component.html',
@@ -8,22 +9,16 @@ import { SignInRecord } from '../shared/sign-in.model';
 export class SheetComponent implements OnInit {
   records: SignInRecord[] = [];
   
-  // allow editing for all row
-  // if passed into child component will turn off just for that row
-  edit: boolean = false;
   
+
+  public getRecords(){
+
+
+    this.records = this.dataService.records;
+    console.log(this.records[0].timeIn);
+  }
  
 
-  public onRecordAdded(record: SignInRecord){
-    
-   
-    // turn editing for rows off
-    this.edit = false;
-    this.records.push(record);
-    //console.log(record.customerName);
-  
-
-  }
 
   // takes SignInRecord object, pulls index
   // inserts this object at that index into records[] array
@@ -32,40 +27,21 @@ export class SheetComponent implements OnInit {
     
     this.records[record.index] = record;
     
-    
-    console.log(record.customerName);
-    console.log(record.shirtJacketColor);
-    console.log(record.contractor);
-    console.log(record.index);
-
+ 
   }
 
-  //if row clicked, set edit to True here
-  // then pass to child property in template
-  public onRowClickEdit(){
 
-    if (this.edit == false){
-
-      this.edit = true;
-
-    } 
-
-  }
-
-  public doneEditing(){
-
-    if (this.edit == true){
-
-      this.edit = false;
-
-    }
+// inject dataservice
+  constructor(private dataService: DataService) { }
 
 
-  }
-
-  constructor() { }
-
+// copy current dataservice records array into this one
   ngOnInit() {
+
+    this.records = this.dataService.records;
+
   }
+
+
 
 }
