@@ -11,6 +11,7 @@ import { BasicHighlightDirective} from './header/directives/basic-highlight.dire
 import { BetterDirectiveDirective } from './header/directives/better-directive.directive';
 import { UnlessDirective } from './header/directives/unless.directive';
 import {DataService} from 'src\\app\\data.service';
+import { StatsComponent } from './stats/stats.component';
 
 
 
@@ -23,7 +24,8 @@ import {DataService} from 'src\\app\\data.service';
     HeaderComponent,
     BasicHighlightDirective,
     BetterDirectiveDirective,
-    UnlessDirective
+    UnlessDirective,
+    StatsComponent
     
   ],
   imports: [

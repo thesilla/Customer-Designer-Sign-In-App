@@ -1,6 +1,7 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
 import { DataService } from '../data.service';
+import { timingSafeEqual } from 'crypto';
 
 
 @Component({
@@ -40,10 +41,20 @@ export class RecordComponent implements OnInit {
 
   public onAddRecord(){
 
-  
-   
+
     // pass current timestamp into timeIn
     this.timeIn = new Date();
+
+    // if salesperson populated right off the bat
+    // --set wait time string to zero
+    // --set timeHelped to timeIn
+    if(this.salesPerson){
+
+      this.waitTime = "0:00";
+      this.timeHelped = this.timeIn;
+      this.timeHelpedHoursString = this.timeIn.toLocaleTimeString();
+    }
+   
 
 
       // push object to service
@@ -65,6 +76,7 @@ export class RecordComponent implements OnInit {
 
 
       // reset property values
+      this.customerName = "";
       this.shirtJacketColor = "";
       this.contractor = "";
       this.project = "";

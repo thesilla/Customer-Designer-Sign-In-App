@@ -1,9 +1,24 @@
 
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="customerName"></td>
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="shirtJacketColor"></td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="contractor"></td>
-<td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="project"></td>
+<td>
+        
+        <select class="form-control" [(ngModel)]="contractor">
+                        <option *ngFor="let c of dataService.contractors" [ngValue]="c">{{c}}</option>
+                      </select>
+
+</td>
+
+<td>
+
+        <select class="form-control" [(ngModel)]="project">
+                        <option *ngFor="let p of dataService.projectNeed" [ngValue]="p">{{p}}</option>
+                      </select>
+
+</td>
+
 <td><input (keyup.enter) = "onAddRecord()" type = "text" [(ngModel)]="notes"></td>
+
 <td style = "text-align: center; padding: 10px;">---</td>
 
 
@@ -12,7 +27,7 @@
     
 
         <select class="form-control" [(ngModel)]="salesPerson">
-                <option *ngFor="let s of salespeople" [ngValue]="s">{{s}}</option>
+                <option *ngFor="let s of dataService.salesPeople" [ngValue]="s">{{s}}</option>
               </select>
 
 

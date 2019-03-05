@@ -10,7 +10,7 @@ import { Hosted } from 'protractor/built/driverProviders';
 })
 export class SavedRecordComponent implements OnInit {
   // will need to access this from parent to change what to show within this component
-  @Input('editSavedRecord') edit: boolean = false;
+  @Input('editSavedRecord') edit: boolean;
 
   // index of where particular component falls in master array of SignInRecords
   @Input('recordIndex') index: number;
@@ -18,70 +18,78 @@ export class SavedRecordComponent implements OnInit {
   // object to pass to view - is assigned by SHEET component
   @Input() signInRecord: SignInRecord;
 
-  updateRecordButtonClicked: boolean = false;
-  // embed hostlistener on to this directive
-  @HostListener('click') onclick(){
+  updateRecordButtonClicked: boolean;
 
-    // if edit is off
-    if (!this.edit ){
-
-      // and also if update button wasn't clicked
-      if(!this.updateRecordButtonClicked){
-
-        //turn editing on
-        this.edit = true;
-        
-        
-
-      } else { // else means the click was on update button and editing should be off
-
-        this.edit = false;
-        this.updateRecordButtonClicked = false;// set button tracker back to false
-      }
-
-    }
+  //set to true if salesperson already set (so waitTime not recalculated each time)
+  salesPersonSet: boolean;
 
 
-    console.log("this hostlistener works!");
-    
-  }
-
-    // array of salespeople
+  // ---------- *** FIXME *** ----------
+  // array of salespeople
   // TODO: ALPHABETECAL ARRAY OF ALL SALESPEOPLE
   // ---> NEED FUNCTIONALITY TO EDIT THIS
-  salespeople: String[] = ['Mary', 'Gretel', 'Sam'];
+  // should be a service?
+  salespeople: String[];
+
+  @Output('updateEvent') updateEvent = new EventEmitter<void>();
 
 
+  // initalize default values
+  ngOnInit() {
 
+    this.salespeople = ['Mary', 'Gretel', 'Sam'];
+    this.edit = false;
+    this.updateRecordButtonClicked = false;
+    this.salesPersonSet = false;
+  }
 
+    // embed hostlistener on to this directive
+  @HostListener('click') onclick(){
+
+      // if edit is off
+      if (!this.edit ){
   
+        // and also if update button wasn't clicked
+        if(!this.updateRecordButtonClicked){
   
+          //turn editing on
+          this.edit = true;
+          
+        } else { // else means the click was on update button and editing should be off
+  
+          this.edit = false;
+          this.updateRecordButtonClicked = false;// set button tracker back to false
+        }
+  
+      }
+  
+  }
+
+
 // what to do once update record button is clicked
 
 
   public onUpdateRecord(){
 
-    
-    //console.log(this.edit);
+    //emit event to tell parent to calculate avg wait time
+    // TODO -need to catch this even somewhere in parent so sibling "stats" can update
+    this.updateEvent.emit();
+
     //if editing is on, turn off
     if(this.edit){
 
       this.edit = false;
     
-
     }
-
-    //console.log(this.edit);
 
     // if a sales person is entered
     // --calculate waitTime/waitTimeSeconds
     // --populate timeHelped
+    // update this exact object in service array
 
-    if (this.signInRecord.salesPerson){
+    if (this.signInRecord.salesPerson && !this.salesPersonSet){
      
-
-      console.log(this.signInRecord.salesPerson);
-      console.log("Time in is: " + this.signInRecord.timeIn);
+  
 
       this.signInRecord.timeInHoursString = this.signInRecord.timeIn.toLocaleTimeString();
       // get time helped (as date), store into property
@@ -93,12 +101,9 @@ export class SavedRecordComponent implements OnInit {
       // calculate time difference
       var timeDiff = this.signInRecord.timeHelped.getTime().valueOf() - this.signInRecord.timeIn.getTime().valueOf();
   
-  
-  
       // strip the ms
       timeDiff = timeDiff / 1000;
       
-   
       // get seconds, store into property
       this.signInRecord.waitTimeSeconds = Math.round(timeDiff);
 
@@ -118,6 +123,8 @@ export class SavedRecordComponent implements OnInit {
       }
       
       this.signInRecord.waitTime = minutes + ":" + secondsTyped;
+      
+      this.salesPersonSet = true;
 
     }
 
@@ -136,10 +143,7 @@ export class SavedRecordComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
-  ngOnInit() {
 
-
-  }
   
 
 }

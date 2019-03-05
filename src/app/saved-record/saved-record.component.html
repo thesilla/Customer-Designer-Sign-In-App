@@ -6,10 +6,26 @@
 
 
 <td *ngIf = "!edit" >{{signInRecord.contractor}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.contractor" ></td>
+<td *ngIf = "edit">
+  
+ 
+  <select  class="form-control" [(ngModel)]="signInRecord.contractor">
+      <option *ngFor="let c of dataService.contractors" [ngValue]="c">{{c}}</option>
+    </select>
+
+</td>
 
 <td *ngIf = "!edit" >{{signInRecord.project}}</td>
-<td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.project"></td>
+<td *ngIf = "edit">
+  
+
+
+  <select class="form-control" [(ngModel)]="signInRecord.project">
+      <option *ngFor="let p of dataService.projectNeed" [ngValue]="p">{{p}}</option>
+    </select>
+
+
+</td>
 
 <td *ngIf = "!edit" >{{signInRecord.notes}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.notes"></td>
