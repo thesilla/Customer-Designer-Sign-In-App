@@ -14,7 +14,7 @@ export class AppComponent {
 // sets project background
   getUrl()
   {
-    return "url('../assets/images/bricks.jpg')";
+    return "url('../assets/images/tile.jpg')";
   }
 
 

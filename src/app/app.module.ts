@@ -13,6 +13,9 @@ import { UnlessDirective } from './header/directives/unless.directive';
 import {DataService} from 'src\\app\\data.service';
 import { StatsComponent } from './stats/stats.component';
 import { NavbarComponent } from './header/navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
+import { SettingsComponent } from './settings/settings.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -28,13 +31,16 @@ import { NavbarComponent } from './header/navbar/navbar.component';
     BetterDirectiveDirective,
     UnlessDirective,
     StatsComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent,
+    SettingsComponent
 
     
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [DataService],
   bootstrap: [AppComponent]
