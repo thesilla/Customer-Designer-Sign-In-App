@@ -12,6 +12,8 @@ import { BetterDirectiveDirective } from './header/directives/better-directive.d
 import { UnlessDirective } from './header/directives/unless.directive';
 import {DataService} from 'src\\app\\data.service';
 import { StatsComponent } from './stats/stats.component';
+import { NavbarComponent } from './header/navbar/navbar.component';
+
 
 
 
@@ -25,7 +27,9 @@ import { StatsComponent } from './stats/stats.component';
     BasicHighlightDirective,
     BetterDirectiveDirective,
     UnlessDirective,
-    StatsComponent
+    StatsComponent,
+    NavbarComponent
+
     
   ],
   imports: [

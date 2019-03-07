@@ -23,7 +23,11 @@ export class StatsComponent implements OnInit {
   
   ngOnInit() {
 
-    
+    this.dataService.recordChangeEvent.subscribe(()=> {
+
+      this.getAvgWaitTime();
+
+    });
   }
 
 }

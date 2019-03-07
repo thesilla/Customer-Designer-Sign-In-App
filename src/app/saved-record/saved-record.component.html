@@ -37,7 +37,7 @@
 
 <td *ngIf = "!edit" >{{signInRecord.salesPerson}}</td>
 <td *ngIf = "edit"><select class="form-control" [(ngModel)]="signInRecord.salesPerson">
-        <option *ngFor="let s of salespeople" [ngValue]="s">{{s}}</option>
+        <option *ngFor="let s of dataService.salesPeople" [ngValue]="s">{{s}}</option>
       </select></td>
 
 

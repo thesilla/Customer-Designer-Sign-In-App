@@ -1,18 +1,123 @@
+<!--
 
-<div class="col-sm-4">
+
+    <div class="card text-white bg-primary mb-3" style="max-width: 20rem;">
+        <div class="card-header">Average Wait Time</div>
+        <div class="card-body">
+          <h1 class="card-title"></h1>
+        </div>
+      </div>
+
+Tile Selection  :0
+Fabrication  :0
+Tile + Fab Selection  :0
+Place Order  :0
+Call  :0
+Return : 1     - Avg Wait  : 3
+Pick Up  :0
+Just Looking  :0
+Exchange  :0
+Other  :0
+
+
+
+  -->
+
+
   <table class="table table-bordered">
+      <tr>
+        <th>Average Wait Time</th>
+  
+      </tr>
+      <tr>
+        <td>{{dataService.avgWaitTime}}</td>
+      
+      </tr>
+  
+  </table>
+
+
+  <table class="table table-bordered">
+        <tr>
+          <th>Tile Selection</th>
+    
+        </tr>
+        <tr>
+          <td>0</td>
+        
+        </tr>
+    
+  </table>
+
+  <table class="table table-bordered">
+      <tr>
+        <th>Fabrication</th>
+  
+      </tr>
+      <tr>
+        <td>0</td>
+      
+      </tr>
+  
+</table>
+
+<table class="table table-bordered">
     <tr>
-      <th>Average Wait Time</th>
+      <th>Tile + Fab Selection</th>
 
     </tr>
     <tr>
-        <td>{{dataService.avgWaitTime}}</td>
+      <td>0</td>
     
-      </tr>
+    </tr>
 
-  </table>
+</table>
 
-  <button class="btn btn-primary" (click) = "getAvgWaitTime()">get avg</button>
+<table class="table table-bordered">
+    <tr>
+      <th>Place Order</th>
 
+    </tr>
+    <tr>
+      <td>0</td>
+    
+    </tr>
 
-</div>
+</table>
+
+<table class="table table-bordered">
+    <tr>
+      <th>Call</th>
+
+    </tr>
+    <tr>
+      <td>0</td>
+    
+    </tr>
+
+</table>
+
+<table class="table table-bordered">
+    <tr>
+      <th>Return</th>
+
+    </tr>
+    <tr>
+      <td>0</td>
+    
+    </tr>
+
+</table>
+
+<table class="table table-bordered">
+    <tr>
+      <th>Pickup</th>
+
+    </tr>
+    <tr>
+      <td>0</td>
+    
+    </tr>
+
+</table>
+

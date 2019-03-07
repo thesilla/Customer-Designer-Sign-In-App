@@ -1,7 +1,11 @@
 import {SignInRecord} from "src\\app\\shared\\sign-in.model";
-import { OnInit } from '@angular/core';
+import { OnInit, Output, EventEmitter } from '@angular/core';
 
 export class DataService implements OnInit{
+
+   @Output() recordChangeEvent = new EventEmitter<void>();
+
+   
 
     avgWaitTime: string;
 
@@ -104,23 +108,24 @@ export class DataService implements OnInit{
       }
      
   
-      average =  Math.floor(waitTimeTotal / recordsCount);
-        // pull minutes and seconds to create wait time string
-        var minutes = Math.floor(average / 60);
-        var seconds = Math.floor(average % 60);
-        
-        // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
-        var secondsTyped: String;
-        if (seconds < 10){
+      average =  waitTimeTotal / recordsCount;
     
-          secondsTyped = "0" + seconds;
-        } else {
-    
-          secondsTyped = "" + seconds;
-    
-        }
-        
-        this.avgWaitTime = minutes + ":" + secondsTyped;
+      // pull minutes and seconds to create wait time string
+      var minutes = Math.floor(average / 60);
+      var seconds = Math.floor(average % 60);
+      
+      // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
+      var secondsTyped: String;
+      if (seconds < 10){
+  
+        secondsTyped = "0" + seconds;
+      } else {
+  
+        secondsTyped = "" + seconds;
+  
+      }
+      
+      this.avgWaitTime = minutes + ":" + secondsTyped;
   
   
     }
@@ -156,6 +161,7 @@ export class DataService implements OnInit{
     ngOnInit() {
 
         this.avgWaitTime = "No Records Added";
+
       }
     
 

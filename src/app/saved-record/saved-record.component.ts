@@ -30,8 +30,10 @@ export class SavedRecordComponent implements OnInit {
   // ---> NEED FUNCTIONALITY TO EDIT THIS
   // should be a service?
   salespeople: String[];
+  
 
-  @Output('updateEvent') updateEvent = new EventEmitter<void>();
+  
+  
 
 
   // initalize default values
@@ -71,9 +73,7 @@ export class SavedRecordComponent implements OnInit {
 
   public onUpdateRecord(){
 
-    //emit event to tell parent to calculate avg wait time
-    // TODO -need to catch this even somewhere in parent so sibling "stats" can update
-    this.updateEvent.emit();
+
 
     //if editing is on, turn off
     if(this.edit){
@@ -129,7 +129,9 @@ export class SavedRecordComponent implements OnInit {
     }
 
 
-
+    //emit event to tell parent to calculate avg wait time
+    // TODO -need to catch this even somewhere in parent so sibling "stats" can update
+    this.dataService.recordChangeEvent.emit();
 
   }
 
