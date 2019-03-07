@@ -1,6 +1,6 @@
 
-
-<table id = "main-table" class="table table-bordered ">
+<div class="table-responsive">
+<table id = "main-table" class="table" style="border: 1px solid #ddd !important;">
     								 
 
   <tr>
@@ -18,12 +18,13 @@
   <tr id ="insertRecord" app-record (recordEvent) = "onRecordAdded($event)"></tr>
   
   <!-- Make certain to pass back in all properties of object back down to saved-record component -->
-  <tr app-saved-record  *ngFor = "let r of records; let i = index" 
+  <tr style="border: 1px solid #ddd !important;" app-saved-record  
+  *ngFor = "let r of records; let i = index" 
              [signInRecord] = "r"
              [recordIndex] = "i"
   >
   </tr>
 
   </table>
-
+</div>
   

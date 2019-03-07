@@ -47,6 +47,6 @@
 <td>{{signInRecord.waitTime}}</td>
 
 
-
+<td *ngIf = "!edit" ></td>
 <td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecordButton()">Update</button></td>
 
