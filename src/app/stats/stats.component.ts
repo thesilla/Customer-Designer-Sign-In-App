@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
@@ -8,6 +8,7 @@ import { DataService } from '../data.service';
 })
 export class StatsComponent implements OnInit {
 
+  timer;
 
   
 
@@ -23,11 +24,16 @@ export class StatsComponent implements OnInit {
   
   ngOnInit() {
 
-    this.dataService.recordChangeEvent.subscribe(()=> {
-
-      this.getAvgWaitTime();
-
+    // subscribe to change event, update totals every time new record added or changed
+    this.dataService.recordChangeEvent.subscribe(() => {
+      
+      this.dataService.findTotals();
+    
+    
     });
+
   }
+
+
 
 }

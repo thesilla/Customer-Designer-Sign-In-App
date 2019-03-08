@@ -30,7 +30,8 @@ Other  :0
   
       </tr>
       <tr>
-        <td>{{dataService.avgWaitTime}}</td>
+        <td *ngIf = "dataService.avgWaitTime">{{dataService.avgWaitTime}}</td>
+        <td *ngIf = "!dataService.avgWaitTime" style = "font-style: italic;">No customers yet!</td>
       
       </tr>
   
@@ -43,7 +44,7 @@ Other  :0
     
         </tr>
         <tr>
-          <td>0</td>
+          <td>{{this.dataService.tileSelectionTotal }}</td>
         
         </tr>
     
@@ -55,7 +56,7 @@ Other  :0
   
       </tr>
       <tr>
-        <td>0</td>
+        <td>{{this.dataService.fabricationTotal }}</td>
       
       </tr>
   
@@ -67,7 +68,7 @@ Other  :0
 
     </tr>
     <tr>
-      <td>0</td>
+      <td>{{this.dataService.tileFabTotal  }}</td>
     
     </tr>
 
@@ -79,7 +80,7 @@ Other  :0
 
     </tr>
     <tr>
-      <td>0</td>
+      <td>{{this.dataService.placeOrderTotal  }}</td>
     
     </tr>
 
@@ -91,7 +92,7 @@ Other  :0
 
     </tr>
     <tr>
-      <td>0</td>
+      <td>{{this.dataService.callTotal  }}</td>
     
     </tr>
 
@@ -103,7 +104,7 @@ Other  :0
 
     </tr>
     <tr>
-      <td>0</td>
+      <td>{{this.dataService.returnTotal  }}</td>
     
     </tr>
 
@@ -115,9 +116,45 @@ Other  :0
 
     </tr>
     <tr>
-      <td>0</td>
+      <td>{{this.dataService.pickupTotal  }}</td>
     
     </tr>
+
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Just Looking</th>
+
+  </tr>
+  <tr>
+    <td>{{this.dataService.justLookingTotal   }}</td>
+  
+  </tr>
+
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Exchange</th>
+
+  </tr>
+  <tr>
+    <td>{{this.dataService.exchangeTotal   }}</td>
+  
+  </tr>
+
+</table>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Other</th>
+
+  </tr>
+  <tr>
+    <td>{{this.dataService.otherTotal }}</td>
+  
+  </tr>
 
 </table>
 

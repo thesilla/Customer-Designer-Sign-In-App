@@ -1,13 +1,72 @@
 import {SignInRecord} from "src\\app\\shared\\sign-in.model";
-import { OnInit, Output, EventEmitter } from '@angular/core';
+import { OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
 
-export class DataService implements OnInit{
+export class DataService implements OnInit, OnChanges{
 
    @Output() recordChangeEvent = new EventEmitter<void>();
 
-   
+   @Output() avgWaitTimeChangeEvent = new EventEmitter<void>();
 
+     
     avgWaitTime: string;
+    
+    // Totals properties
+    tileSelectionTotal: number;
+    fabricationTotal: number;
+    tileFabTotal: number;
+    placeOrderTotal: number;
+    callTotal: number;
+    returnTotal: number;
+    pickupTotal: number;
+    justLookingTotal: number;
+    exchangeTotal: number;
+    otherTotal: number;
+
+    findTotals(){
+  
+      this.tileSelectionTotal =0; 
+      this.fabricationTotal = 0;
+      this.tileFabTotal = 0;
+      this.placeOrderTotal = 0;
+      this.callTotal = 0;
+      this.returnTotal = 0;
+      this.pickupTotal = 0;
+      this.justLookingTotal = 0;
+      this.exchangeTotal = 0;
+      this.otherTotal = 0;
+
+      for(let r of this.records){
+
+        switch (r.project) {
+          case "Tile Selection":
+            this.tileSelectionTotal =  this.tileSelectionTotal + 1;
+            break;
+          case "Fabrication":
+            this.fabricationTotal = this.fabricationTotal + 1;
+            break;
+          case "Tile + Fab Selection":
+            this.tileFabTotal = this.tileFabTotal + 1;
+            break;
+          case "Place Order":
+            this.placeOrderTotal = this.placeOrderTotal + 1;
+            break;
+          case "Call":
+            this.callTotal = this.callTotal + 1;
+            break;
+          case "Return":
+            this.returnTotal = this.returnTotal + 1;
+            break;
+          case "Pick Up":
+            this.pickupTotal = this.pickupTotal + 1;
+          case "Just Looking":
+            this.justLookingTotal = this.justLookingTotal + 1;
+          case "Exchange":
+            this.exchangeTotal = this.exchangeTotal + 1;
+          case "Other":
+            this.otherTotal = this.otherTotal + 1; 
+        }
+      }
+    }
 
     // global records array
     // normally we would grab this from database
@@ -87,12 +146,6 @@ export class DataService implements OnInit{
     ];
 
 
-
-
-
-    
-
-  
   
     getAvgWaitTime(){
   
@@ -102,13 +155,22 @@ export class DataService implements OnInit{
       for(let r of this.records){
   
         waitTimeTotal = waitTimeTotal + r.waitTimeSeconds;
-        recordsCount = recordsCount + 1;  
-      
-  
+        
+
+        
       }
-     
-  
-      average =  waitTimeTotal / recordsCount;
+       
+      recordsCount = this.records.length;
+      if (recordsCount != 0){
+
+        average =  waitTimeTotal / recordsCount;
+      
+      } else {
+
+        average = 0;
+      }
+
+      
     
       // pull minutes and seconds to create wait time string
       var minutes = Math.floor(average / 60);
@@ -161,6 +223,12 @@ export class DataService implements OnInit{
     ngOnInit() {
 
         this.avgWaitTime = "No Records Added";
+
+      }
+
+      ngOnChanges(){
+
+
 
       }
     

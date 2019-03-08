@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { DataService } from '../data.service';
 
 @Component({
@@ -7,12 +7,12 @@ import { DataService } from '../data.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+ 
 
-  value: number = 10;
   constructor(private dataService: DataService) { }
 
+
   ngOnInit() {
-  }
 
-
+      }
 }

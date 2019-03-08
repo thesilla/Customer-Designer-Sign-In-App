@@ -58,7 +58,7 @@ export class RecordComponent implements OnInit {
 
 
       // push object to service
-      this.dataService.records.push(new SignInRecord(this.customerName,
+      this.dataService.add(new SignInRecord(this.customerName,
         this.shirtJacketColor,
         this.contractor,
         this.project,
@@ -89,6 +89,8 @@ export class RecordComponent implements OnInit {
       this.index = -1;// index set to -1 by default
       this.timeInHoursString = "", 
       this.timeHelpedHoursString = ""; // set to "" by default
+
+      this.dataService.recordChangeEvent.emit();
       
   }
 

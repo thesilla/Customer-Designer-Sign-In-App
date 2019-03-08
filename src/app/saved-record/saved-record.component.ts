@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
 import { DataService } from '../data.service';
 import { Hosted } from 'protractor/built/driverProviders';
@@ -8,7 +8,7 @@ import { Hosted } from 'protractor/built/driverProviders';
   templateUrl: './saved-record.component.html',
   styleUrls: ['./saved-record.component.css']
 })
-export class SavedRecordComponent implements OnInit {
+export class SavedRecordComponent implements OnInit, OnDestroy {
   // will need to access this from parent to change what to show within this component
   @Input('editSavedRecord') edit: boolean;
 
@@ -32,18 +32,81 @@ export class SavedRecordComponent implements OnInit {
   salespeople: String[];
   
 
-  
-  
+
+
+  timer;
+  waitTime: number;
+
+
 
 
   // initalize default values
+  // start TIMER
   ngOnInit() {
+
+    
 
     this.salespeople = ['Mary', 'Gretel', 'Sam'];
     this.edit = false;
     this.updateRecordButtonClicked = false;
     this.salesPersonSet = false;
+
+    // if salesperson NOT populated at entry, start timer
+    if(!this.signInRecord.salesPerson){
+      this.signInRecord.waitTimeSeconds = 0;
+      this.timer = setInterval(() => {
+  
+        this.updateWaitTime();
+        this.dataService.getAvgWaitTime();
+    
+  
+  
+      }, 1000);
+  
+
+    // if salesperson assigned right away
+    // set everything to zero and display immediately
+    } else {
+
+      this.signInRecord.waitTimeSeconds = 0;
+      this.signInRecord.waitTime = "0:00";
+    }
+
+
+    
   }
+
+
+// increments wait time in seconds, then converts to string to display
+// used in timer over and over to create a "clock"
+  updateWaitTime(){
+    this.signInRecord.waitTimeSeconds = this.signInRecord.waitTimeSeconds +  1;
+    // pull minutes and seconds to create wait time string
+    var minutes = Math.floor(this.signInRecord.waitTimeSeconds / 60);
+    var seconds = Math.floor(this.signInRecord.waitTimeSeconds % 60);
+    
+    // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
+    var secondsTyped: String;
+    if (seconds < 10){
+
+      secondsTyped = "0" + seconds;
+    } else {
+
+      secondsTyped = "" + seconds;
+
+    }
+    
+    this.signInRecord.waitTime = minutes + ":" + secondsTyped;
+
+ 
+
+
+  
+    
+
+  }
+
+
 
     // embed hostlistener on to this directive
   @HostListener('click') onclick(){
@@ -82,59 +145,38 @@ export class SavedRecordComponent implements OnInit {
     
     }
 
+    //  *****INSERT WAIT TIME******
     // if a sales person is entered
-    // --calculate waitTime/waitTimeSeconds
     // --populate timeHelped
+    // --stop timer
     // update this exact object in service array
 
     if (this.signInRecord.salesPerson && !this.salesPersonSet){
      
   
 
-      this.signInRecord.timeInHoursString = this.signInRecord.timeIn.toLocaleTimeString();
       // get time helped (as date), store into property
       this.signInRecord.timeHelped = new Date();
 
       // get time helped (as String), store into property
       this.signInRecord.timeHelpedHoursString = this.signInRecord.timeHelped.toLocaleTimeString();
 
-      // calculate time difference
-      var timeDiff = this.signInRecord.timeHelped.getTime().valueOf() - this.signInRecord.timeIn.getTime().valueOf();
-  
-      // strip the ms
-      timeDiff = timeDiff / 1000;
-      
-      // get seconds, store into property
-      this.signInRecord.waitTimeSeconds = Math.round(timeDiff);
 
-      // pull minutes and seconds to create wait time string
-      var minutes = Math.floor(this.signInRecord.waitTimeSeconds / 60);
-      var seconds = Math.floor(this.signInRecord.waitTimeSeconds % 60);
-      
-      // if less than 10 seconds, add 0 in front (i.e 09 instead of  9)
-      var secondsTyped: String;
-      if (seconds < 10){
-  
-        secondsTyped = "0" + seconds;
-      } else {
-  
-        secondsTyped = "" + seconds;
-  
-      }
-      
-      this.signInRecord.waitTime = minutes + ":" + secondsTyped;
-      
       this.salesPersonSet = true;
+
+      // stop timer
+      clearInterval(this.timer);
 
     }
 
 
     //emit event to tell parent to calculate avg wait time
-    // TODO -need to catch this even somewhere in parent so sibling "stats" can update
+    // catch this in stats so it can subscribe onInit and update
     this.dataService.recordChangeEvent.emit();
 
   }
 
+  // necessary because clicking button on row also triggers edit=true event
   onUpdateRecordButton(){
     console.log("this button was clicked!");
     this.updateRecordButtonClicked = true;
@@ -145,6 +187,10 @@ export class SavedRecordComponent implements OnInit {
 
   constructor(private dataService: DataService) { }
 
+  ngOnDestroy(): void {
+    clearInterval(this.timer);
+
+  }
 
   
 
