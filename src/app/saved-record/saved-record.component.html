@@ -44,7 +44,7 @@
 <td >{{signInRecord.timeHelpedHoursString}}</td>
 
 
-<td>{{signInRecord.waitTime}}</td>
+<td ><div class = "waitTime" [ngClass]="{'waitTimeWarning': warning, 'waitTimeDanger' : danger, 'flashing' : flashing}">{{signInRecord.waitTime}}</div></td>
 
 
 <td *ngIf = "!edit" ></td>

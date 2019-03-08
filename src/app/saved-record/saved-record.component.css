@@ -1,4 +1,34 @@
 input {
 
-    width: 90%;
+    width: 98%;
+}
+
+
+.waitTime {
+
+    padding: 5px;
+    border-radius: 5px 5px;
+}
+
+.waitTimeWarning{
+    
+    background-color: #f4f135;
+
+
+
+}
+
+
+.waitTimeDanger{
+
+    background-color: #f2a2a2;
+    color: red;
+
+
+}
+
+.flashing{
+    
+    background-color: #f2a2a2;
+    color: yellow;
 }

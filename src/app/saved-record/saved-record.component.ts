@@ -23,6 +23,16 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   //set to true if salesperson already set (so waitTime not recalculated each time)
   salesPersonSet: boolean;
 
+  //turn on danger flag if wait time past a certain point
+  // TODO - allow user to set this threshold
+  danger: boolean;
+  dangerThreshold: number;
+
+  //turn on warning flag if wait time past a certain point
+  // TODO - allow user to set this threshold
+  warning: boolean;
+  warningThreshold: number;
+  flashing: boolean; // 
 
   // ---------- *** FIXME *** ----------
   // array of salespeople
@@ -30,10 +40,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   // ---> NEED FUNCTIONALITY TO EDIT THIS
   // should be a service?
   salespeople: String[];
-  
-
-
-
+ 
   timer;
   waitTime: number;
 
@@ -45,6 +52,11 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     
+    this.danger = false;
+    this.warning = false;
+    this.warningThreshold = 5; // 5 minutes = 300 seconds
+    this.dangerThreshold = 10; // 10 minutes = 600 seconds
+
 
     this.salespeople = ['Mary', 'Gretel', 'Sam'];
     this.edit = false;
@@ -98,6 +110,23 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     
     this.signInRecord.waitTime = minutes + ":" + secondsTyped;
 
+    // set warning flags
+    // 1. warning flag
+    if(this.signInRecord.waitTimeSeconds >=this.warningThreshold && this.signInRecord.waitTimeSeconds < this.dangerThreshold ){
+
+      this.warning = true;
+      this.danger = false;
+
+    } 
+    // 2. danger flag
+    if(this.signInRecord.waitTimeSeconds >= this.dangerThreshold ){
+
+      this.warning = false;
+      this.danger = true;
+
+    } 
+
+   
  
 
 
@@ -105,6 +134,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     
 
   }
+
 
 
 
