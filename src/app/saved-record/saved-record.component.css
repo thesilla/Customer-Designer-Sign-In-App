@@ -21,7 +21,7 @@ input {
 
 .waitTimeDanger{
 
-    background-color: #f2a2a2;
+    background-color: #ffbfbf; 
     color: red;
 
 
@@ -29,6 +29,13 @@ input {
 
 .flashing{
     
-    background-color: #f2a2a2;
+    background-color: #ffbfbf;
     color: yellow;
+}
+
+
+.salesPersonSet{
+
+    background-color: #e8eaed;
+    color: gray;
 }

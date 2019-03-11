@@ -32,7 +32,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   // TODO - allow user to set this threshold
   warning: boolean;
   warningThreshold: number;
-  flashing: boolean; // 
+
 
   // ---------- *** FIXME *** ----------
   // array of salespeople
@@ -54,8 +54,8 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     
     this.danger = false;
     this.warning = false;
-    this.warningThreshold = 5; // 5 minutes = 300 seconds
-    this.dangerThreshold = 10; // 10 minutes = 600 seconds
+    this.warningThreshold = 300; // 5 minutes = 300 seconds
+    this.dangerThreshold = 600; // 10 minutes = 600 seconds
 
 
     this.salespeople = ['Mary', 'Gretel', 'Sam'];
@@ -112,14 +112,14 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
 
     // set warning flags
     // 1. warning flag
-    if(this.signInRecord.waitTimeSeconds >=this.warningThreshold && this.signInRecord.waitTimeSeconds < this.dangerThreshold ){
+    if(this.signInRecord.waitTimeSeconds >=this.dataService.warningThreshold && this.signInRecord.waitTimeSeconds < this.dataService.dangerThreshold ){
 
       this.warning = true;
       this.danger = false;
 
     } 
     // 2. danger flag
-    if(this.signInRecord.waitTimeSeconds >= this.dangerThreshold ){
+    if(this.signInRecord.waitTimeSeconds >= this.dataService.dangerThreshold ){
 
       this.warning = false;
       this.danger = true;
@@ -155,9 +155,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
           this.edit = false;
           this.updateRecordButtonClicked = false;// set button tracker back to false
         }
-  
       }
-  
   }
 
 
@@ -222,6 +220,5 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
 
   }
 
-  
 
 }

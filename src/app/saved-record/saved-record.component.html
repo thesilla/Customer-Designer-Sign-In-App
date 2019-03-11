@@ -1,11 +1,11 @@
-<td *ngIf = "!edit"  >{{signInRecord.customerName}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit"  >{{signInRecord.customerName}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.customerName"></td>
 
-<td *ngIf = "!edit" >{{signInRecord.shirtJacketColor}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.shirtJacketColor}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.shirtJacketColor"></td>
 
 
-<td *ngIf = "!edit" >{{signInRecord.contractor}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.contractor}}</td>
 <td *ngIf = "edit">
   
  
@@ -15,7 +15,7 @@
 
 </td>
 
-<td *ngIf = "!edit" >{{signInRecord.project}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.project}}</td>
 <td *ngIf = "edit">
   
 
@@ -27,26 +27,26 @@
 
 </td>
 
-<td *ngIf = "!edit" >{{signInRecord.notes}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit"  ><div style="word-wrap: break-word; max-width: 110px;">{{signInRecord.notes}}</div></td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.notes"></td>
 
 
 
-<td >{{signInRecord.timeInHoursString}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" >{{signInRecord.timeInHoursString}}</td>
 
 
-<td *ngIf = "!edit" >{{signInRecord.salesPerson}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.salesPerson}}</td>
 <td *ngIf = "edit"><select class="form-control" [(ngModel)]="signInRecord.salesPerson">
         <option *ngFor="let s of dataService.salesPeople" [ngValue]="s">{{s}}</option>
       </select></td>
 
 
-<td >{{signInRecord.timeHelpedHoursString}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" >{{signInRecord.timeHelpedHoursString}}</td>
 
 
-<td ><div class = "waitTime" [ngClass]="{'waitTimeWarning': warning, 'waitTimeDanger' : danger, 'flashing' : flashing}">{{signInRecord.waitTime}}</div></td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" ><div class = "waitTime" [ngClass]="{'waitTimeWarning': warning, 'waitTimeDanger' : danger}">{{signInRecord.waitTime}}</div></td>
 
 
-<td *ngIf = "!edit" ></td>
+<td *ngIf = "!edit" [ngClass]="{'salesPersonSet': salesPersonSet}"></td>
 <td *ngIf = "edit" ><button class="btn btn-secondary" (click) = "onUpdateRecordButton()">Update</button></td>
 

@@ -30,7 +30,7 @@ Other  :0
   
       </tr>
       <tr>
-        <td *ngIf = "dataService.avgWaitTime">{{dataService.avgWaitTime}}</td>
+        <td [ngClass]="{'waitTimeWarning': dataService.warning, 'waitTimeDanger' : dataService.danger}" *ngIf = "dataService.avgWaitTime">{{dataService.avgWaitTime}}</td>
         <td *ngIf = "!dataService.avgWaitTime" style = "font-style: italic;">No customers yet!</td>
       
       </tr>

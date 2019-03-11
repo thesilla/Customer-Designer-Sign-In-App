@@ -10,3 +10,21 @@ th, td {
     text-align: center;
 
 }
+
+
+.waitTimeWarning{
+    
+    background-color: #f4f135;
+
+
+
+}
+
+
+.waitTimeDanger{
+
+    background-color: #ffbfbf; 
+    color: red;
+
+
+}

@@ -16,11 +16,12 @@
     <th></th>
   </tr>
   <tr id ="insertRecord" app-record (recordEvent) = "onRecordAdded($event)"></tr>
+  <br/>
   
   <!-- Make certain to pass back in all properties of object back down to saved-record component -->
   <tr style="border: 1px solid #ddd !important;" app-saved-record  
   *ngFor = "let r of records; let i = index" 
-             [signInRecord] = "r"
+             [signInRecord] = "r" 
              [recordIndex] = "i"
   >
   </tr>

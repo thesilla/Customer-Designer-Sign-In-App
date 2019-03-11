@@ -9,6 +9,14 @@ export class DataService implements OnInit, OnChanges{
 
      
     avgWaitTime: string;
+
+    // wait time flags
+    warning: boolean;
+    danger: boolean;
+
+    // flag thresholds
+    warningThreshold: number;
+    dangerThreshold: number;
     
     // Totals properties
     tileSelectionTotal: number;
@@ -188,6 +196,24 @@ export class DataService implements OnInit, OnChanges{
       }
       
       this.avgWaitTime = minutes + ":" + secondsTyped;
+
+
+
+        // set warning flags
+        // 1. warning flag
+        if(average >=this.warningThreshold && average < this.dangerThreshold ){
+
+          this.warning = true;
+          this.danger = false;
+
+        } 
+        // 2. danger flag
+        if(average >= this.dangerThreshold ){
+
+          this.warning = false;
+          this.danger = true;
+
+        } 
   
   
     }
@@ -223,6 +249,10 @@ export class DataService implements OnInit, OnChanges{
     ngOnInit() {
 
         this.avgWaitTime = "No Records Added";
+        this.danger = false;
+        this.warning = false;
+        this.warningThreshold = 3; // 5 minutes = 300 seconds
+        this.dangerThreshold = 6; // 10 minutes = 600 seconds
 
       }
 
