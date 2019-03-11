@@ -26,12 +26,12 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   //turn on danger flag if wait time past a certain point
   // TODO - allow user to set this threshold
   danger: boolean;
-  dangerThreshold: number;
+
 
   //turn on warning flag if wait time past a certain point
   // TODO - allow user to set this threshold
   warning: boolean;
-  warningThreshold: number;
+
 
 
   // ---------- *** FIXME *** ----------
@@ -54,8 +54,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     
     this.danger = false;
     this.warning = false;
-    this.warningThreshold = 300; // 5 minutes = 300 seconds
-    this.dangerThreshold = 600; // 10 minutes = 600 seconds
+
 
 
     this.salespeople = ['Mary', 'Gretel', 'Sam'];

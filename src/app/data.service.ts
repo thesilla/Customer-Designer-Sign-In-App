@@ -15,8 +15,9 @@ export class DataService implements OnInit, OnChanges{
     danger: boolean;
 
     // flag thresholds
-    warningThreshold: number;
-    dangerThreshold: number;
+    // FIXME --> find out why this only words when variables declared here
+    warningThreshold = 300; // 5 minutes = 300 seconds
+    dangerThreshold = 600; // 10 minutes = 600 seconds
     
     // Totals properties
     tileSelectionTotal: number;
@@ -214,6 +215,13 @@ export class DataService implements OnInit, OnChanges{
           this.danger = true;
 
         } 
+
+        if(average < this.warningThreshold){ //if average drops below warning threshold, turn both flags off
+
+          this.warning = false;
+          this.danger = false;
+
+        }
   
   
     }
@@ -251,8 +259,7 @@ export class DataService implements OnInit, OnChanges{
         this.avgWaitTime = "No Records Added";
         this.danger = false;
         this.warning = false;
-        this.warningThreshold = 3; // 5 minutes = 300 seconds
-        this.dangerThreshold = 6; // 10 minutes = 600 seconds
+
 
       }
 

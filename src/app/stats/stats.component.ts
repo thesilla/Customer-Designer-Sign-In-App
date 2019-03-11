@@ -10,6 +10,8 @@ export class StatsComponent implements OnInit {
 
   timer;
 
+
+
   
 
   getAvgWaitTime(){
