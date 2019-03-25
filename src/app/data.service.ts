@@ -31,6 +31,7 @@ export class DataService implements OnInit, OnChanges{
     exchangeTotal: number;
     otherTotal: number;
 
+    // adds totals of every category
     findTotals(){
   
       this.tileSelectionTotal =0; 

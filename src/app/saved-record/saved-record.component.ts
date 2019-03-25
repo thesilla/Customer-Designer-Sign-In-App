@@ -89,7 +89,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
 
 
 // increments wait time in seconds, then converts to string to display
-// used in timer over and over to create a "clock"
+// used in setInterval timer over and over to create a "clock"
   updateWaitTime(){
     this.signInRecord.waitTimeSeconds = this.signInRecord.waitTimeSeconds +  1;
     // pull minutes and seconds to create wait time string
