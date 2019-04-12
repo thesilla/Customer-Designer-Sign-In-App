@@ -22,6 +22,7 @@ export class SheetComponent implements OnInit {
 
   // takes SignInRecord object, pulls index
   // inserts this object at that index into records[] array
+  /*
   public onRecordEdit(record: SignInRecord){
 
     
@@ -29,7 +30,7 @@ export class SheetComponent implements OnInit {
     
  
   }
-
+*/
 
 // inject dataservice
   constructor(private dataService: DataService) { }

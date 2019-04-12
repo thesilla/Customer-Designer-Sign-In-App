@@ -1,7 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
 import { DataService } from '../data.service';
-import { timingSafeEqual } from 'crypto';
 
 
 @Component({
@@ -57,6 +56,8 @@ export class RecordComponent implements OnInit {
    
 
 
+      // FIXME - no tracking index correctly
+
       // push object to service
       this.dataService.add(new SignInRecord(this.customerName,
         this.shirtJacketColor,
@@ -68,7 +69,7 @@ export class RecordComponent implements OnInit {
         this.timeHelped,
         this.waitTime,
         0, // wait time in seconds - its 0 if record was first created
-        this.index,// index set to -1 by default
+        //this.index,// index set to -1 by default
         this.timeIn.toLocaleTimeString(), 
         this.timeHelpedHoursString // set to "" by default
         ));
@@ -86,11 +87,11 @@ export class RecordComponent implements OnInit {
       this.timeHelped = null;
       this.waitTime = "";
       this.waitTimeSeconds = 0; // wait time in seconds - its 0 if record was first created
-      this.index = -1;// index set to -1 by default
-      this.timeInHoursString = "", 
+      //this.index = -1;// index set to -1 by default
+      this.timeInHoursString = ""; 
       this.timeHelpedHoursString = ""; // set to "" by default
 
-      this.dataService.recordChangeEvent.emit();
+      this.dataService.recordChangeEvent.emit();// tells dataservice that a record was changed
       
   }
 

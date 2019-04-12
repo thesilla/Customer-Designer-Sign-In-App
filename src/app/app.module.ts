@@ -17,6 +17,9 @@ import { FooterComponent } from './footer/footer.component';
 import { SettingsComponent } from './settings/settings.component';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import {Http} from '@angular/http';
+import {HttpModule} from '@angular/http';
+import { DataAccessService } from './data-access.service';
 
 
 
@@ -42,9 +45,10 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpModule
   ],
-  providers: [DataService],
+  providers: [DataService, DataAccessService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

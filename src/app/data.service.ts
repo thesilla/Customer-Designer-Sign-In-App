@@ -1,13 +1,19 @@
 import {SignInRecord} from "src\\app\\shared\\sign-in.model";
-import { OnInit, Output, EventEmitter, OnChanges } from '@angular/core';
+import { OnInit, Output, EventEmitter, OnChanges, Injectable } from '@angular/core';
+import { DataAccessService } from './data-access.service';
+import 'rxjs/Rx'; //unlock operators
+import {Response} from '@angular/http';
 
+import {Observable} from 'rxjs/Observable';
+
+@Injectable()
 export class DataService implements OnInit, OnChanges{
 
    @Output() recordChangeEvent = new EventEmitter<void>();
 
    @Output() avgWaitTimeChangeEvent = new EventEmitter<void>();
 
-     
+    testindex:number;
     avgWaitTime: string;
 
     // wait time flags
@@ -31,6 +37,40 @@ export class DataService implements OnInit, OnChanges{
     exchangeTotal: number;
     otherTotal: number;
 
+    constructor (private dataAccessService: DataAccessService){
+
+  
+    // use nested HTTP service to get all data records from PHP backend
+    this.dataAccessService.getRecords().subscribe(
+      (data: any[]) => 
+      {
+
+          for(var record of data){
+              
+              this.records.push(new SignInRecord(
+                  record.customerName, 
+                  record.clothing, 
+                  record.contractor, 
+                  record.project, 
+                  record.notes, 
+                  record.timeIn,
+                  record.salesperson,
+                  record.timeHelped,
+                  record.waitTime,
+                  record.waitTimeSeconds,
+                  record.timeInHoursString,
+                  record.timeHelpedHoursString
+
+                   ));
+
+          }
+      }
+
+  )
+
+
+
+    }
     // adds totals of every category
     findTotals(){
   
@@ -261,8 +301,14 @@ export class DataService implements OnInit, OnChanges{
         this.danger = false;
         this.warning = false;
 
+  
 
       }
+
+
+
+
+
 
       ngOnChanges(){
 

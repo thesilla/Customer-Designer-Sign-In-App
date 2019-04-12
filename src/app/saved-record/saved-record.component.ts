@@ -1,19 +1,21 @@
 import { Component, OnInit, Input, Output, EventEmitter, HostListener, OnDestroy } from '@angular/core';
 import { SignInRecord } from '../shared/sign-in.model';
 import { DataService } from '../data.service';
-import { Hosted } from 'protractor/built/driverProviders';
+import { TimerService } from '../timer.service';
+
 
 @Component({
   selector: '[app-saved-record]',
   templateUrl: './saved-record.component.html',
-  styleUrls: ['./saved-record.component.css']
+  styleUrls: ['./saved-record.component.css'],
+  providers: [TimerService]
 })
 export class SavedRecordComponent implements OnInit, OnDestroy {
   // will need to access this from parent to change what to show within this component
   @Input('editSavedRecord') edit: boolean;
 
-  // index of where particular component falls in master array of SignInRecords
-  @Input('recordIndex') index: number;
+  // index of where particular component falls in master array of SignInRecords @Input('recordIndex') 
+  @Input() index: number;
   
   // object to pass to view - is assigned by SHEET component
   @Input() signInRecord: SignInRecord;
@@ -46,12 +48,15 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
 
 
 
+  constructor(private dataService: DataService, private timerService: TimerService) { }
 
   // initalize default values
   // start TIMER
   ngOnInit() {
-
     
+    // TEST OF COMPONENT LEVEL SERVICE PERSISTENCE
+    this.timerService.index = this.index;
+
     this.danger = false;
     this.warning = false;
 
@@ -61,8 +66,10 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     this.edit = false;
     this.updateRecordButtonClicked = false;
     this.salesPersonSet = false;
+    //this.signInRecord.waitTime = this.timerService.waitTime;
 
     // if salesperson NOT populated at entry, start timer
+    
     if(!this.signInRecord.salesPerson){
       this.signInRecord.waitTimeSeconds = 0;
       this.timer = setInterval(() => {
@@ -82,16 +89,19 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
       this.signInRecord.waitTimeSeconds = 0;
       this.signInRecord.waitTime = "0:00";
     }
+    
 
 
     
   }
 
+//FIXME --> NEEDS TO UPDATE WAITTIMESECONDS OF RECORD WITHIN SERVICE
 
 // increments wait time in seconds, then converts to string to display
 // used in setInterval timer over and over to create a "clock"
   updateWaitTime(){
     this.signInRecord.waitTimeSeconds = this.signInRecord.waitTimeSeconds +  1;
+    //this.dataService.records[this.index].waitTimeSeconds = this.signInRecord.waitTimeSeconds;
     // pull minutes and seconds to create wait time string
     var minutes = Math.floor(this.signInRecord.waitTimeSeconds / 60);
     var seconds = Math.floor(this.signInRecord.waitTimeSeconds % 60);
@@ -108,6 +118,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
     }
     
     this.signInRecord.waitTime = minutes + ":" + secondsTyped;
+    
 
     // set warning flags
     // 1. warning flag
@@ -138,6 +149,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
 
 
     // embed hostlistener on to this directive
+    // when you click on a record, it was be editable
   @HostListener('click') onclick(){
 
       // if edit is off
@@ -212,7 +224,7 @@ export class SavedRecordComponent implements OnInit, OnDestroy {
   }
 
 
-  constructor(private dataService: DataService) { }
+
 
   ngOnDestroy(): void {
     clearInterval(this.timer);

@@ -19,23 +19,12 @@ export class FooterComponent implements OnInit {
   constructor() { }
 
 
-// Observables are declarative that is, you define the function for publishing values, but it is not executed until the consumer subscribes to it
-  simpleObservable = new Observable((observer) => {
-    
-    // observable execution
-    observer.next("hello");
-    observer.complete();
-})
 
 
   ngOnInit() {
 
 
-      // subscribe to the observable
-    this.simpleObservable.subscribe((num) => { 
-      console.log(num);
-      }
-    );
+  
 
 
   }

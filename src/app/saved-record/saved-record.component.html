@@ -1,7 +1,7 @@
-<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit"  >{{signInRecord.customerName}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit"  >{{signInRecord.customerName}}{{this.timerService.index }}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.customerName"></td>
 
-<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.shirtJacketColor}}</td>
+<td [ngClass]="{'salesPersonSet': salesPersonSet}" *ngIf = "!edit" >{{signInRecord.shirtJacketColor}}{{index}}</td>
 <td *ngIf = "edit"><input (keyup.enter) = "onUpdateRecord()" type="text" class="text" [(ngModel)]="signInRecord.shirtJacketColor"></td>
 
 
